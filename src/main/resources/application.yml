@@ -1,16 +1,28 @@
 spring:
   application:
-    name: eureka
+    name: discovery-service
 
-server:
-  port: 8761
-
+---
 eureka:
   instance:
-    prefer-ip-address: false
-    hostname: guidance-discovery-service.herokuapp.com
+    hostname: guidance-discovery-service1.herokuapp.com
+    nonSecurePort: 80
   client:
-    register-with-eureka: false
-    fetch-registry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: https://guidance-discovery-service2.herokuapp.com/eureka/
+spring:
+  config:
+    activate:
+      on-profile: heroku-discovery1
+---
+eureka:
+  instance:
+    hostname: guidance-discovery-service2.herokuapp.com
+    nonSecurePort: 80
+  client:
+    serviceUrl:
+      defaultZone: https://guidance-discovery-service1.herokuapp.com/eureka/
+spring:
+  config:
+    activate:
+      on-profile: heroku-discovery2
