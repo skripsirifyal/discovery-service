@@ -5,11 +5,11 @@ spring:
 ---
 eureka:
   instance:
-    hostname: guidance-discovery-service1.herokuapp.com
+    hostname: guidance-discovery-service.herokuapp.com
     nonSecurePort: 80
   client:
     serviceUrl:
-      defaultZone: https://guidance-discovery-service2.herokuapp.com/eureka/
+      defaultZone: https://guidance-discovery-service.herokuapp.com/eureka/
 spring:
   config:
     activate:
