@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: discovery-service
+
+---
+server:
+  port: 10001
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10002/eureka/
+spring:
+  config:
+    activate:
+      on-profile: discovery1
+---
+server:
+  port: 10002
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10001/eureka/
+spring:
+  config:
+    activate:
+      on-profile: discovery2
+---
+eureka:
+  instance:
+    hostname: guidance-discovery-service1.herokuapp.com
+    nonSecurePort: 80
+  client:
+    serviceUrl:
+      defaultZone: https://guidance-discovery-service2.herokuapp.com/eureka/
+spring:
+  config:
+    activate:
+      on-profile: heroku-discovery1
+---
+eureka:
+  instance:
+    hostname: guidance-discovery-service2.herokuapp.com
+    nonSecurePort: 80
+  client:
+    serviceUrl:
+      defaultZone: https://guidance-discovery-service1.herokuapp.com/eureka/
+spring:
+  config:
+    activate:
+      on-profile: heroku-discovery2
