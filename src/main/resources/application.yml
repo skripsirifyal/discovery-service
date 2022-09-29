@@ -2,6 +2,7 @@ spring:
   application:
     name: discovery-service
 
+---
 eureka:
   instance:
     hostname: guidance-discovery-service.herokuapp.com
@@ -11,3 +12,21 @@ eureka:
     register-with-eureka: false
     serviceUrl:
       defaultZone: https://guidance-discovery-service.herokuapp.com/eureka/
+spring:
+  config:
+    activate:
+      on-profile: heroku-discovery1
+---
+eureka:
+  instance:
+    hostname: guidance-discovery-service2.herokuapp.com
+    nonSecurePort: 80
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: https://guidance-discovery-service1.herokuapp.com/eureka/
+spring:
+  config:
+    activate:
+      on-profile: heroku-discovery2
